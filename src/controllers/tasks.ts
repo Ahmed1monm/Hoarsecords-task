@@ -27,7 +27,7 @@ export async function createTask(req: Request, res: Response) {
         }
         payload.shouldFailInProcessing = shouldFailInProcessing;
         const task = await taskQueue.add(type, {type, payload}, {delay});
-        return res.json({id: task.id, status: "Task added to queue", task});
+        return res.status(201).json({id: task.id, status: "Task added to queue"});
     } catch (e) {
         const dlqJob = await DLQ.add('failedToAddTask', { type, payload, error: e.message });
         logger.error(`Error adding task to queue: ${e.message} and added to DLQ with id: ${dlqJob.id}`);
