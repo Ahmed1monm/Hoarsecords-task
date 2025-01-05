@@ -31,6 +31,12 @@
   npm test
 ```
 --------
+## Tech Stack:
+- Node.js | TypeScript
+- Express.js
+- Redis Queue (BullMQ)
+- Arena (Redis Queue Monitoring)
+--------
 ## Test The API:
 - You can run the APIs using postman by importing the following collection:
 ```bash
