@@ -40,7 +40,7 @@
 								{
 									"key": "shouldFailInProcessing",
 									"value": "true",
-									"disabled": true
+									"disabled": false
 								}
 							]
 						}
