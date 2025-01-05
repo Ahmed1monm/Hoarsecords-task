@@ -1,9 +1,5 @@
 import {Queue} from 'bullmq';
-
-const connection = {
-    host: '127.0.0.1',
-    port: 6379,
-}
+import config from '../config';
 
 export const taskQueue = new Queue('tasks', {
     defaultJobOptions: {
@@ -11,13 +7,21 @@ export const taskQueue = new Queue('tasks', {
             type: 'exponential',
         },
         attempts: 5,
-        removeOnComplete: true,
-        removeOnFail: true,
+        removeOnComplete: false,
+        removeOnFail: false,
     },
-    connection
+    connection: config.redisConnection
 });
 
 export const DLQ = new Queue('dead-letter-queue', {
-    connection
+    defaultJobOptions: {
+        backoff: {
+            type: 'exponential',
+        },
+        attempts: 5,
+        removeOnComplete: false,
+        removeOnFail: false,
+    },
+    connection: config.redisConnection
 });
 

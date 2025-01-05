@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
-import {taskQueue} from "../clients/queues";
-import {logger} from "../clients";
+import {taskQueue, DLQ, logger} from "../clients";
 import {calculateDelay} from "../utils";
 
 /*
@@ -18,13 +17,20 @@ import {calculateDelay} from "../utils";
 *
 * */
 export async function createTask(req: Request, res: Response) {
+    const {type, payload, visibility_time} = req.body;
+    const {shouldFailInProcessing, shouldFailFast} = req.query;
+    const delay = calculateDelay(visibility_time);
+
     try {
-        const {type, payload, visibility_time} = req.body;
-        const delay = calculateDelay(visibility_time);
+        if (shouldFailFast) {
+            throw new Error('Failed to add task to queue');
+        }
+        payload.shouldFailInProcessing = shouldFailInProcessing;
         const task = await taskQueue.add(type, {type, payload}, {delay});
         return res.json({id: task.id, status: "Task added to queue", task});
     } catch (e) {
-        logger.error("Error creating task: ", e);
+        const dlqJob = await DLQ.add('failedToAddTask', { type, payload, error: e.message });
+        logger.error(`Error adding task to queue: ${e.message} and added to DLQ with id: ${dlqJob.id}`);
         res.status(500).json({error: e.message});
     }
 }

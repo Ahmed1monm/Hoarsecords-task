@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use(errorHandler);
-
 app.use("/api/v1", v1Router);
+
+app.use(errorHandler);
 
 app.listen(config.port, () => {
     logger.info(`Server is running on port ${config.port}`);
