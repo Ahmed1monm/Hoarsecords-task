@@ -1,5 +1,6 @@
 import * as path from "path";
 import dotenv from "dotenv";
+import * as process from "node:process";
 
 dotenv.config();
 const root_dir = path.join(__dirname, "..");
@@ -18,7 +19,7 @@ const config = {
             backoff: {
                 type: 'exponential',
             },
-            attempts: 5,
+            attempts: process.env.BULL_WORKER_ATTEMPTS || 5,
             removeOnComplete: false,
             removeOnFail: false,
         },
