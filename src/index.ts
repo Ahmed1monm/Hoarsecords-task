@@ -8,7 +8,7 @@ import {logger} from "./clients";
 import {errorHandler} from "./middleware";
 import v1Router from "./routes";
 
-const app = express();
+export const app = express();
 
 app.use(morgan("common"));
 app.use(bodyParser.urlencoded({extended: false}));
