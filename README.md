@@ -43,7 +43,7 @@
 ```
 -------
 ## Monitoring:
-- You can monitor the jobs by visiting the following URL:
+- You can monitor the jobs via **Arena Dashboard** by visiting the following URL:
 ```bash
   http://localhost:4567
 ```
