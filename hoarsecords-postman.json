@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "d5804001-a76e-4550-9adb-154501167bdf",
+		"name": "Hoarsecords",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25042739"
+	},
+	"item": [
+		{
+			"name": "tasks",
+			"item": [
+				{
+					"name": "createTask",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"string\",\n  \"payload\": {\n    \"name\": \"New Task\"\n  },\n  \"visibility_time\": \"2025-01-05 18:32:00.000\" // optional \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/tasks",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "shouldFailFast",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "shouldFailInProcessing",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DLQ",
+			"item": [
+				{
+					"name": "view all jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/dlq",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"dlq"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete jobs in dlq",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/dlq",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"dlq"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "localhost:8000/api/v1",
+			"type": "string"
+		}
+	]
+}
