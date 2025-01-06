@@ -16,7 +16,7 @@
 - - Run Redis on port 6379
 - - Run the application by running the following command:
 ```bash
-  npm start
+  npm run start:dev
 ```
 - You can create .env file and add the following variables:
 ```bash
